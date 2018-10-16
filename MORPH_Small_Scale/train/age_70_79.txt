@@ -1,0 +1,12 @@
+/mnt/disk50/datasets/MORPH/Images_ori/289343_02M71.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/080833_01M70.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/117821_0M76.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/080833_02M70.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/289343_00M70.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/100911_1M71.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/068130_0F74.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/019066_08M70.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/146749_02F70.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/117821_2M77.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/289343_01M70.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/100911_0M71.JPG
