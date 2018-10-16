@@ -1,0 +1,25 @@
+PlainCNN_Asym_Oct02_14-49-44
+pretrained_model_dir:None
+weight_decay:0.0002
+batch_size:64
+learning_rates:[0.01, 0.005, 0.001, 0.0001, 1e-05]
+balance:False
+epoch_num:50
+decay_points:[10, 20, 30, 40]
+load_function:None
+momentum:0.9
+pretrain:False
+loss:CrossEntropy
+predictor:Max
+acc_calc:Exp
+
+------EPOCH 0 START------
+[epoch 0, step 100]: accuracy=0.527, loss=1.377
+[epoch 0, step 200]: accuracy=0.606, loss=1.150
+[epoch 0, step 300]: accuracy=0.619, loss=1.120
+[epoch 0, step 400]: accuracy=0.632, loss=1.068
+[epoch 0, step 500]: accuracy=0.637, loss=1.043
+[epoch 0, step 600]: accuracy=0.642, loss=1.023
+[epoch 0, step 700]: accuracy=0.666, loss=0.978
+[epoch 0, step 800]: accuracy=0.675, loss=0.948
+[epoch 0, step 900]: accuracy=0.681, loss=0.924

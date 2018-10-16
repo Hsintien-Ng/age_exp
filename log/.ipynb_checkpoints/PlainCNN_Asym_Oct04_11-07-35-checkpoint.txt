@@ -1,0 +1,155 @@
+PlainCNN_Asym_Oct04_11-07-35
+pretrained_model_dir:None
+weight_decay:0.0002
+batch_size:64
+learning_rates:[0.01, 0.005, 0.001, 0.0001, 1e-05]
+balance:False
+epoch_num:50
+decay_points:[10, 20, 30, 40]
+load_function:None
+momentum:0.9
+pretrain:False
+loss:CrossEntropy
+predictor:Max
+acc_calc:Exp
+
+------EPOCH 0 START------
+[epoch 0, step 100]: accuracy=0.523, loss=1.390
+[epoch 0, step 200]: accuracy=0.593, loss=1.193
+[epoch 0, step 300]: accuracy=0.620, loss=1.120
+[epoch 0, step 400]: accuracy=0.637, loss=1.070
+[epoch 0, step 500]: accuracy=0.644, loss=1.033
+[epoch 0, step 600]: accuracy=0.638, loss=1.045
+[epoch 0, step 700]: accuracy=0.656, loss=0.994
+[epoch 0, step 800]: accuracy=0.662, loss=0.960
+[epoch 0, step 900]: accuracy=0.675, loss=0.945
+[epoch 0, step 1000]: accuracy=0.675, loss=0.936
+[epoch 0, step 1100]: accuracy=0.672, loss=0.933
+[epoch 0, step 1200]: accuracy=0.685, loss=0.912
+[epoch 0, step 1300]: accuracy=0.678, loss=0.932
+[epoch 0, step 1400]: accuracy=0.697, loss=0.885
+[epoch 0, step 1500]: accuracy=0.695, loss=0.879
+[epoch 0, step 1600]: accuracy=0.702, loss=0.875
+[epoch 0, step 1700]: accuracy=0.697, loss=0.862
+[epoch 0, step 1800]: accuracy=0.697, loss=0.873
+[epoch 0, step 1900]: accuracy=0.704, loss=0.848
+[epoch 0, step 2000]: accuracy=0.697, loss=0.867
+[epoch 0, step 2100]: accuracy=0.709, loss=0.843
+[epoch 0, step 2200]: accuracy=0.703, loss=0.851
+[epoch 0, step 2300]: accuracy=0.707, loss=0.846
+[epoch 0, step 2400]: accuracy=0.715, loss=0.814
+[epoch 0, step 2500]: accuracy=0.720, loss=0.804
+[epoch 0, step 2600]: accuracy=0.716, loss=0.818
+[epoch 0, step 2700]: accuracy=0.709, loss=0.833
+[epoch 0, step 2800]: accuracy=0.711, loss=0.821
+[epoch 0, step 2900]: accuracy=0.721, loss=0.804
+[epoch 0, step 3000]: accuracy=0.719, loss=0.808
+[epoch 0, step 3100]: accuracy=0.723, loss=0.786
+[epoch 0, step 3200]: accuracy=0.722, loss=0.802
+[epoch 0, step 3300]: accuracy=0.714, loss=0.803
+[epoch 0, step 3400]: accuracy=0.721, loss=0.789
+[epoch 0, step 3500]: accuracy=0.733, loss=0.762
+[epoch 0, step 3600]: accuracy=0.710, loss=0.817
+[epoch 0, step 3700]: accuracy=0.721, loss=0.789
+[epoch 0, step 3800]: accuracy=0.724, loss=0.780
+[epoch 0, step 3900]: accuracy=0.734, loss=0.773
+[epoch 0, step 4000]: accuracy=0.733, loss=0.762
+[epoch 0, step 4100]: accuracy=0.730, loss=0.779
+[epoch 0, step 4200]: accuracy=0.733, loss=0.766
+[epoch 0, step 4300]: accuracy=0.726, loss=0.779
+[epoch 0, step 4400]: accuracy=0.732, loss=0.753
+------EPOCH 0 COMPLETE------
+[epoch 0's validation result]: accuracy=0.411
+------EPOCH 1 START------
+[epoch 1, step 100]: accuracy=0.740, loss=0.752
+[epoch 1, step 200]: accuracy=0.738, loss=0.752
+[epoch 1, step 300]: accuracy=0.744, loss=0.727
+[epoch 1, step 400]: accuracy=0.747, loss=0.725
+[epoch 1, step 500]: accuracy=0.732, loss=0.771
+[epoch 1, step 600]: accuracy=0.739, loss=0.750
+[epoch 1, step 700]: accuracy=0.740, loss=0.736
+[epoch 1, step 800]: accuracy=0.735, loss=0.742
+[epoch 1, step 900]: accuracy=0.737, loss=0.758
+[epoch 1, step 1000]: accuracy=0.735, loss=0.749
+[epoch 1, step 1100]: accuracy=0.730, loss=0.766
+[epoch 1, step 1200]: accuracy=0.736, loss=0.750
+[epoch 1, step 1300]: accuracy=0.746, loss=0.730
+[epoch 1, step 1400]: accuracy=0.738, loss=0.731
+[epoch 1, step 1500]: accuracy=0.746, loss=0.711
+[epoch 1, step 1600]: accuracy=0.740, loss=0.745
+[epoch 1, step 1700]: accuracy=0.737, loss=0.747
+[epoch 1, step 1800]: accuracy=0.747, loss=0.732
+[epoch 1, step 1900]: accuracy=0.740, loss=0.731
+[epoch 1, step 2000]: accuracy=0.731, loss=0.751
+[epoch 1, step 2100]: accuracy=0.749, loss=0.722
+[epoch 1, step 2200]: accuracy=0.745, loss=0.723
+[epoch 1, step 2300]: accuracy=0.733, loss=0.754
+[epoch 1, step 2400]: accuracy=0.745, loss=0.715
+[epoch 1, step 2500]: accuracy=0.749, loss=0.714
+[epoch 1, step 2600]: accuracy=0.740, loss=0.739
+[epoch 1, step 2700]: accuracy=0.751, loss=0.715
+[epoch 1, step 2800]: accuracy=0.737, loss=0.734
+[epoch 1, step 2900]: accuracy=0.743, loss=0.721
+[epoch 1, step 3000]: accuracy=0.743, loss=0.728
+[epoch 1, step 3100]: accuracy=0.745, loss=0.725
+[epoch 1, step 3200]: accuracy=0.741, loss=0.723
+[epoch 1, step 3300]: accuracy=0.751, loss=0.723
+[epoch 1, step 3400]: accuracy=0.747, loss=0.721
+[epoch 1, step 3500]: accuracy=0.749, loss=0.728
+[epoch 1, step 3600]: accuracy=0.742, loss=0.744
+[epoch 1, step 3700]: accuracy=0.749, loss=0.716
+[epoch 1, step 3800]: accuracy=0.748, loss=0.718
+[epoch 1, step 3900]: accuracy=0.749, loss=0.716
+[epoch 1, step 4000]: accuracy=0.748, loss=0.724
+[epoch 1, step 4100]: accuracy=0.737, loss=0.735
+[epoch 1, step 4200]: accuracy=0.744, loss=0.732
+[epoch 1, step 4300]: accuracy=0.745, loss=0.722
+[epoch 1, step 4400]: accuracy=0.744, loss=0.728
+------EPOCH 1 COMPLETE------
+[epoch 1's validation result]: accuracy=0.424
+------EPOCH 2 START------
+[epoch 2, step 100]: accuracy=0.764, loss=0.697
+[epoch 2, step 200]: accuracy=0.762, loss=0.681
+[epoch 2, step 300]: accuracy=0.754, loss=0.699
+[epoch 2, step 400]: accuracy=0.756, loss=0.698
+[epoch 2, step 500]: accuracy=0.752, loss=0.693
+[epoch 2, step 600]: accuracy=0.753, loss=0.700
+[epoch 2, step 700]: accuracy=0.748, loss=0.705
+[epoch 2, step 800]: accuracy=0.757, loss=0.687
+[epoch 2, step 900]: accuracy=0.748, loss=0.701
+[epoch 2, step 1000]: accuracy=0.753, loss=0.689
+[epoch 2, step 1100]: accuracy=0.754, loss=0.697
+[epoch 2, step 1200]: accuracy=0.756, loss=0.704
+[epoch 2, step 1300]: accuracy=0.750, loss=0.695
+[epoch 2, step 1400]: accuracy=0.749, loss=0.710
+[epoch 2, step 1500]: accuracy=0.756, loss=0.689
+[epoch 2, step 1600]: accuracy=0.755, loss=0.693
+[epoch 2, step 1700]: accuracy=0.751, loss=0.697
+[epoch 2, step 1800]: accuracy=0.755, loss=0.686
+[epoch 2, step 1900]: accuracy=0.749, loss=0.710
+[epoch 2, step 2000]: accuracy=0.759, loss=0.686
+[epoch 2, step 2100]: accuracy=0.750, loss=0.711
+[epoch 2, step 2200]: accuracy=0.753, loss=0.705
+[epoch 2, step 2300]: accuracy=0.756, loss=0.686
+[epoch 2, step 2400]: accuracy=0.755, loss=0.690
+[epoch 2, step 2500]: accuracy=0.738, loss=0.718
+[epoch 2, step 2600]: accuracy=0.755, loss=0.704
+[epoch 2, step 2700]: accuracy=0.758, loss=0.689
+[epoch 2, step 2800]: accuracy=0.748, loss=0.698
+[epoch 2, step 2900]: accuracy=0.756, loss=0.682
+[epoch 2, step 3000]: accuracy=0.762, loss=0.682
+[epoch 2, step 3100]: accuracy=0.758, loss=0.686
+[epoch 2, step 3200]: accuracy=0.751, loss=0.700
+[epoch 2, step 3300]: accuracy=0.759, loss=0.684
+[epoch 2, step 3400]: accuracy=0.745, loss=0.696
+[epoch 2, step 3500]: accuracy=0.757, loss=0.690
+[epoch 2, step 3600]: accuracy=0.763, loss=0.674
+[epoch 2, step 3700]: accuracy=0.752, loss=0.700
+[epoch 2, step 3800]: accuracy=0.757, loss=0.704
+[epoch 2, step 3900]: accuracy=0.761, loss=0.669
+[epoch 2, step 4000]: accuracy=0.753, loss=0.676
+[epoch 2, step 4100]: accuracy=0.756, loss=0.680
+[epoch 2, step 4200]: accuracy=0.762, loss=0.676
+[epoch 2, step 4300]: accuracy=0.764, loss=0.677
+[epoch 2, step 4400]: accuracy=0.750, loss=0.699
+------EPOCH 2 COMPLETE------

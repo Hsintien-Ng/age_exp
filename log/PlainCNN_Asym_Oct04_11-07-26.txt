@@ -1,0 +1,16 @@
+PlainCNN_Asym_Oct04_11-07-26
+pretrained_model_dir:None
+weight_decay:0.0002
+batch_size:64
+learning_rates:[0.01, 0.005, 0.001, 0.0001, 1e-05]
+balance:False
+epoch_num:50
+decay_points:[10, 20, 30, 40]
+load_function:None
+momentum:0.9
+pretrain:False
+loss:CrossEntropy
+predictor:Max
+acc_calc:Exp
+
+------EPOCH 0 START------
