@@ -1,0 +1,2 @@
+/mnt/disk50/datasets/MORPH/Images_ori/080833_01M70.JPG
+/mnt/disk50/datasets/MORPH/Images_ori/080833_02M70.JPG
