@@ -15,6 +15,10 @@ class KLDivLoss(loss.Loss):
         return 'KLDiv'
 
     def calculate_loss(self, output, label):
+        if isinstance(output, list):
+            output = output[-1]
+        if isinstance(label, list):
+            label = label[-1]
         log_softmax = t.log(output)
 
-        return self.criterion(log_softmax, label)
+        return self.criterion(log_softmax, label) * 10

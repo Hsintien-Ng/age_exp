@@ -1,6 +1,6 @@
 from train.config import Config
 from utils.logger import Logger
-from utils.figure import scatter_plot
+from utils.model import tbWriter
 from train.loss.loss import Loss
 from train.predictor.predictor import Predictor
 from train.calculator.calculator import Calculator
@@ -42,7 +42,6 @@ class Trainer:
         assert isinstance(loss, Loss)
         assert isinstance(predictor, Predictor)
         assert isinstance(calculator, Calculator)
-        assert calculator.get_alias() == 'Exp' or calculator.get_alias() == 'Age'
 
     def train(self):
         """
@@ -92,11 +91,11 @@ class Trainer:
             # do validation
             net.eval()
             val_cal = self.validate(net, val_loader, e, tb_writer, global_step)
-            if self.calculator.get_alias() == 'Exp':
+            if self.config.task == 'Exp':
                 if max_validation_acc < val_cal:
                     max_validation_acc = val_cal
                     best_epoch = e
-            elif self.calculator.get_alias() == 'Age':
+            elif self.config.task == 'Age':
                 if min_validation_mae > val_cal:
                     min_validation_mae = val_cal
                     best_epoch = e
@@ -107,10 +106,10 @@ class Trainer:
         # training complete
         info = '==========Training Complete=========='
         self.logger.log_to(info, self.config.logger_alias)
-        if self.calculator.get_alias() == 'Exp':
+        if self.config.task == 'Exp':
             info = 'Best accuracy is %.3f, at epoch %i' % (max_validation_acc, best_epoch)
             self.logger.log_to(info, self.config.logger_alias)
-        elif self.calculator.get_alias() == 'Age':
+        elif self.config.task == 'Age':
             info = 'Best mean absolute error is %.5f, at epoch %i' % (min_validation_mae, best_epoch)
             self.logger.log_to(info, self.config.logger_alias)
 
@@ -128,59 +127,56 @@ class Trainer:
         total_cal = 0
         total_loss = 0
         time_start = time.time()
-        for i, (img, label, norm_dtb_label) in enumerate(train_loader):
+        for i, (img, label) in enumerate(train_loader):
             # make data gpu variable
-            img = img.cuda()
-            img = Variable(img)
-            img = img.float()
-            label = label.cuda()
-            label = Variable(label)
-            label = label.float()
-            norm_dtb_label = norm_dtb_label.cuda()
-            norm_dtb_label = Variable(norm_dtb_label)
-            norm_dtb_label = norm_dtb_label.float()
+            if isinstance(img, list):
+                img = [Variable(i.cuda()).float() for i in img]
+            else:
+                img = img.cuda()
+                img = Variable(img)
+                img = img.float()
+            if isinstance(label, list):
+                label = [Variable(l.cuda()).float() for l in label]
+            else:
+                label = label.cuda()
+                label = Variable(label)
+                label = label.float()
 
             # clear grad each iterator
             optimizer.zero_grad()
 
             # forward->calculate loss->backward calculate grad->apply grad
             output = net(img)
-            if isinstance(output, list) or isinstance(output, tuple):
-                loss = 0
-                for o in output:
-                    # loss += self.loss.calculate_loss(o, label)
-                    loss += self.loss.calculate_loss(o, norm_dtb_label)
-                output = output[-1]
-            else:
-                # loss = self.loss.calculate_loss(output, label)
-                loss = self.loss.calculate_loss(output, norm_dtb_label)
+            loss = self.loss.calculate_loss(output, label)
             loss.backward()
             optimizer.step()
 
             # accuracy calculating
             prediction = self.predictor.predict(output)
             batch_cal = self.calculator.record(prediction, label)
-            # print('image_shape:', img.shape)
-            # print('prediction:', prediction)
-            # print('prediction_shape:', prediction.shape)
-            # print('label:', label)
-            # print('label_shape:', label.shape)
 
             # for logging
             total_loss += loss.item()
             total_cal += batch_cal
 
             # tensorboard
-            tb_writer.add_image('image', img.cpu(), global_step)
-            tb_writer.add_figure('predict',
-                                 scatter_plot(prediction.detach().cpu(), self.calculator.get_alias()), global_step)
-            tb_writer.add_figure('groudTruth',
-                                 scatter_plot(label.cpu(), self.calculator.get_alias()), global_step)
-            if self.calculator.get_alias() == 'Exp':
-                tb_writer.add_scalar('accuracy', batch_cal.cpu(), global_step)
-            elif self.calculator.get_alias() == 'Age':
-                tb_writer.add_scalar('MAE', batch_cal.cpu(), global_step)
-            tb_writer.add_scalar('loss', loss.item(), global_step)
+            data_dict = {}
+            data_dict['predict'] = prediction
+            data_dict['groudTruth'] = label
+            data_dict['indicator'] = batch_cal
+            data_dict['loss'] = loss
+            # tb_writer.add_image('image', img.cpu(), global_step)
+            # tb_writer.add_figure('predict',
+            #                      scatter_plot(prediction.detach().cpu(), self.config.task), global_step)
+            # tb_writer.add_figure('groudTruth',
+            #                      scatter_plot(label.cpu(), self.config.task), global_step)
+            # if self.config.task == 'Exp':
+            #     tb_writer.add_scalar('accuracy', batch_cal.cpu(), global_step)
+            # elif self.config.task == 'Age':
+            #     tb_writer.add_scalar('MAE', batch_cal.cpu(), global_step)
+            # tb_writer.add_scalar('loss', loss.item(), global_step)
+            tbWriter(tb_writer, data_dict, global_step, self.config.task)
+
 
             # log
             num = 50
@@ -190,7 +186,7 @@ class Trainer:
                 time_start = time_end
                 ave_cal = total_cal / num
                 ave_loss = total_loss / num
-                if self.calculator.get_alias() == 'Exp':
+                if self.config.task == 'Exp':
                     info = '[epoch %i, step %i]: accuracy=%.3f, loss=%.3f' % (epoch_num, i, ave_cal, ave_loss)
                 else:
                     info = '[epoch %i, step %i]: MAE=%.3f, loss=%.3f' % (epoch_num, i, ave_cal, ave_loss)
@@ -216,18 +212,24 @@ class Trainer:
         """
         total_cal = 0
         count = 0
-        for i, (img, label, _) in enumerate(val_loader):
+        for i, (img, label) in enumerate(val_loader):
             # make data gpu variable
-            img = img.cuda()
-            label = label.cuda()
             with t.no_grad():
-                img = Variable(img)
-                label = Variable(label)
+                if isinstance(img, list):
+                    img = [Variable(i.cuda()).float() for i in img]
+                else:
+                    img = img.cuda()
+                    img = Variable(img)
+                    img = img.float()
+                if isinstance(label, list):
+                    label = [Variable(l.cuda()).float() for l in label]
+                else:
+                    label = label.cuda()
+                    label = Variable(label)
+                    label = label.float()
 
                 # forward->calculate loss->backward calculate grad->apply grad
                 output = net(img)
-                if isinstance(output, list) or isinstance(output, tuple):
-                    output = output[-1]
 
                 # accuracy calculating
                 prediction = self.predictor.predict(output)
@@ -238,14 +240,14 @@ class Trainer:
 
         # log
         ave_cal = total_cal / count
-        if self.calculator.get_alias() == 'Exp':
+        if self.config.task == 'Exp':
             info = '[epoch %i\'s validation result]: accuracy=%.3f' % (epoch_num, ave_cal)
         else:
             info = '[epoch %i\'s validation result]: MAE=%.3f' % (epoch_num, ave_cal)
         self.logger.log_to(info, self.config.logger_alias)
 
         # tensorboard
-        if self.calculator.get_alias() == 'Exp':
+        if self.config.task == 'Exp':
             tb_writer.add_scalar('val_accuracy', ave_cal, global_step)
         else:
             tb_writer.add_scalar('val_mae', ave_cal, global_step)

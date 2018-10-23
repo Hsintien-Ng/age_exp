@@ -18,4 +18,7 @@ class MaxPredictor(predictor.Predictor):
                 is class_num
         :return:
         """
+        if isinstance(output, list):
+            output = output[-1]
+
         return t.argmax(output, dim=1)

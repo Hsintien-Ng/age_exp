@@ -10,7 +10,7 @@ class AgeMSECalculator(calculator.Calculator):
         self.sample_num = 0
 
     def get_alias(self):
-        return 'Age'
+        return 'Age_MSE'
 
     def record(self, prediction, label):
         """
@@ -20,7 +20,10 @@ class AgeMSECalculator(calculator.Calculator):
         :return: 
         """
         assert isinstance(prediction, t.Tensor)
-        assert isinstance(label, t.Tensor)
+        assert isinstance(label, t.Tensor) or isinstance(label, list)
+        if isinstance(label, list):
+            label = label[0]
+            assert isinstance(label, t.Tensor)
         abs = (prediction.float() - label.float()).abs()
         SE = t.dot(abs, abs)
         self.sample_se += SE

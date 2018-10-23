@@ -24,6 +24,8 @@ class ExpectionPredictor(predictor.Predictor):
         :return:
         """
         # output = output.float()
+        if isinstance(output, list):
+            output = output[-1]
         res = t.squeeze(t.mm(output, self.multiplier), dim=1)
 
         return t.round(res)

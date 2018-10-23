@@ -1,8 +1,8 @@
 class Config:
-    def __init__(self, epoch_num, momentum, weight_decay, learning_rates,
-                 decay_points, batch_size, parameters_func, tb_log_path,
-                 save_dir, pretrain, pretrained_model_dir=None,
-                 load_function=None, logger_alias=None, gpu_id=None):
+    def __init__(self, epoch_num=0, momentum=0.99, weight_decay=1e-4, learning_rates=None,
+                 decay_points=None, batch_size=64, parameters_func=None, tb_log_path=None,
+                 save_dir=None, pretrain=False, pretrained_model_dir=None, test_model_dir=None,
+                 load_function=None, logger_alias=None, gpu_id=None, task='Exp'):
         """
         :param epoch_num: stop training when trained epoch_num epochs
         :param momentum:
@@ -39,6 +39,8 @@ class Config:
         self.save_dir = save_dir
         self.pretrain = pretrain
         self.pretrained_model_dir = pretrained_model_dir
+        self.test_model_dir = test_model_dir
         self.load_function = load_function
         self.logger_alias = logger_alias
         self.gpu_id = gpu_id
+        self.task = task
