@@ -70,11 +70,11 @@ if __name__ == '__main__':
             valid_all.append([])
             test_all.append([])
 
-    for mode in ['train', 'valid', 'test']:
-        if mode == 'train':
-            age_all = train_all
-        elif mode == 'valid':
-            age_all = valid_all
-        else:
-            age_all = test_all
-        write_files(output_path, images_path, mode, age_all)
+    # for mode in ['train', 'valid', 'test']:
+    #     if mode == 'train':
+    #         age_all = train_all
+    #     elif mode == 'valid':
+    #         age_all = valid_all
+    #     else:
+    #         age_all = test_all
+    #     write_files(output_path, images_path, mode, age_all)

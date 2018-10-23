@@ -31,6 +31,17 @@ def scatter_plot(tensor, ylabel_name):
     return fig
 
 
+def integralImage(img):
+    integ_graph = np.zeros((img.shape[0] + 1, img.shape[1] + 1), dtype=np.int32)
+    for x in range(img.shape[0]):
+        sum_clo = 0
+        for y in range(img.shape[1]):
+            sum_clo += img[x, y]
+            integ_graph[x + 1, y + 1] = integ_graph[x, y + 1] + sum_clo
+
+    return integ_graph
+
+
 if __name__ == '__main__':
     tensor = torch.Tensor([50, 24, 32, 18])
     fig = scatter_plot(tensor, 'test')
