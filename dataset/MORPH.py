@@ -26,8 +26,13 @@ class MORPH(data.Dataset):
         return img_path
 
 
+    @staticmethod
+    def get_alias():
+        return 'MORPH'
+
+
     def __init__(self, data_dir, mode, balance):
-        assert mode in ['train', 'valid']
+        assert mode in ['train', 'valid', 'test']
         self.age_paths = []
         self.age_labels = []
         # for 7 stages
@@ -87,7 +92,7 @@ class MORPH(data.Dataset):
                 trans.ToTensor(),
                 trans.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
             ])
-        elif self.mode == 'valid':
+        else:
             self.transform = trans.Compose([
                 trans.Resize(200),
                 trans.CenterCrop(200),
@@ -95,17 +100,16 @@ class MORPH(data.Dataset):
                 trans.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
             ])
 
-
     def normal_distribute(self, mean, std=0.7, num_dim=100):
-        vec = []
-        for i in range(num_dim):
-            exponent = math.exp(-(i - 1. - mean) ** 2 / (2. * (std ** 2)))
-            multiplier = 1. / (math.sqrt(2. * math.pi) * std)
-            vec.append(exponent * multiplier)
-        vec = np.asarray(vec)
-        vec = vec / np.sum(vec)
+            vec = []
+            for i in range(num_dim):
+                exponent = math.exp(-(i - 1. - mean) ** 2 / (2. * (std ** 2)))
+                multiplier = 1. / (math.sqrt(2. * math.pi) * std)
+                vec.append(exponent * multiplier)
+            vec = np.asarray(vec)
+            vec = vec / np.sum(vec)
 
-        return vec
+            return vec
 
 
     def format_data(self, path, label):
