@@ -11,6 +11,7 @@ from train.predictor.max_predictor import MaxPredictor
 from train.config import Config
 from train.trainer import Trainer
 from utils.logger import Logger
+from utils.model import load_pretrained_func
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 def generate_alias(model_cls, task):
@@ -38,12 +39,18 @@ def generate_file_msg(sps, loss, predictor, acc_calc):
 # dir define
 
 index_dir = os.path.join('/', 'home', 'xintian', 'projects', 'age_exp', 'MORPH_Split')
+pretrained_model_dir = os.path.join('/', 'home', 'xintian', 'projects', 'age_exp',
+                                    'models', 'Age_PlainCNN_Asym_Oct15_23-21-48', 'epoch_28.pkl')
 
 # super param define
-sps = {'epoch_num': 50, 'momentum': 0.9, 'weight_decay': 0.0002,
-               'learning_rates': [1e-2, 5e-3, 1e-3, 1e-4, 1e-5],
-               'decay_points': [10, 20, 30, 40], 'batch_size': 64, 'pretrain': False,
-               'pretrained_model_dir': None, 'load_function': None, 'balance': False}
+sps = {'epoch_num': 20, 'momentum': 0.9, 'weight_decay': 0.0002,
+               # 'learning_rates': [1e-2, 5e-3, 1e-3, 1e-4, 1e-5],
+               'learning_rates': [1e-3, 1e-4],
+               # 'decay_points': [10, 20, 30, 40],
+               'decay_points': [10],
+               'batch_size': 64, 'pretrain': True,
+               'pretrained_model_dir': pretrained_model_dir,
+               'load_function': load_pretrained_func, 'balance': False}
 parameters_func = plain_parameters_func
 
 gpu_id = [0]
